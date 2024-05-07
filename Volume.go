@@ -46,6 +46,16 @@ func (c *Client) GetMute() bool {
 	return false
 }
 
+func (c *Client) SetMute(mute bool) error {
+	status := "Off"
+	if mute == true {
+		status = "On"
+	}
+
+	http.Get(fmt.Sprintf("http://%s/goform/formiPhoneAppMute.xml?1+Mute"+status, c.Host))
+	return nil
+}
+
 func (c *Client) VolumeUp() {
 	http.Get(fmt.Sprintf("http://%s/goform/formiPhoneAppDirect.xml?MVUP", c.Host))
 }
